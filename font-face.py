@@ -3,6 +3,7 @@ import glob
 import argparse
 from subprocess import Popen, PIPE
 
+
 def make_font_face():
     directory_arg = 'directory'
     parser = argparse.ArgumentParser(description='Make font-face css / sccs.')
@@ -27,6 +28,9 @@ def make_font_face():
     p = os.getcwd()
     os.chdir(new_dir)
 
+    text = ""
+    merged_file_name = os.path.basename(os.path.normpath(new_dir)) + ".css"
+
     for file in os.listdir(new_dir):
         if file.endswith('.ttf'):
             process = Popen(['sfnt2woff', file], stdout=PIPE)
@@ -44,20 +48,28 @@ def make_font_face():
             process.wait()
             print(output)
 
-            filename = file[:len(file)-4]
+            filename = file[:len(file) - 4]
             css = filename + '.css'
-            template = """            
+            template = """
+
 @font-face {
     font-family: "%s";
     src: url('$path/%s.woff2') format('woff2'),
          url('$path/%s.woff') format('woff'),
          url('$path/%s.svg#%s') format('svg'),
          url('$path/%s.ttf') format('ttf');   
-}            
+}
+            
+
             """
-            css_file = open( os.path.join(new_dir, css),"w+")
-            css_file.write(template % (filename, filename, filename, filename, filename, filename))
+            s= template % (filename, filename, filename, filename, filename, filename)
+            text +=s
+            css_file = open(os.path.join(new_dir, css), "w+")
+            css_file.write(s)
             css_file.close()
+    merged_file = open(os.path.join(new_dir, merged_file_name), "w+")
+    merged_file.write(text)
+    merged_file.close()
     os.chdir(p)
 
 
