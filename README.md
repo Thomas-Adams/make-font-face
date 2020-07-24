@@ -19,7 +19,7 @@ small programs properly compiled on Windows. I recommend a recent and decent
 Linux distribution, like Ubuntu, Centos, etc. There the compilation of the C 
 related things is pretty much straight forward
 
-Also provide proper font files ( no osbscure charachter and no space). 
+Also provide proper font files ( no osbscure charachter and no spaces in file names). 
 
 
 Usage
@@ -34,6 +34,17 @@ Gives you
 ----
 
 converts *.ttf to woff, woff2, svg and produces a font-face.css file at once
+
+
+Convert otf to ttf
+----
+
+```
+fontforge -script convert_otf2ttf.sh FONTNAME.otf
+``` 
+
+see: http://www.stuermer.ch/blog/convert-otf-to-ttf-font-on-ubuntu.html
+
 
 
 
