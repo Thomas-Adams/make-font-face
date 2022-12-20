@@ -54,10 +54,10 @@ def make_font_face():
 
 @font-face {
     font-family: "%s";
-    src: url('$path/%s.woff2') format('woff2'),
-         url('$path/%s.woff') format('woff'),
-         url('$path/%s.svg#%s') format('svg'),
-         url('$path/%s.ttf') format('ttf');   
+    src: url('#{$path}/%s.woff2') format('woff2'),
+         url('#{$path}/%s.woff') format('woff'),
+         url('#{$path}/%s.svg#%s') format('svg'),
+         url('#{$path}/%s.ttf') format('ttf');   
 }
             
 
